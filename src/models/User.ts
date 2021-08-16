@@ -25,7 +25,7 @@ export class User {
       userDataDir: `./tmp/${this.email}`,
       args: ['--no-sandbox'],
       defaultViewport: VIEW_PORTS[this.viewport],
-      product: 'firefox',
+      product: 'chrome',
     });
 
     const page = await browser.newPage();
