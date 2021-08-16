@@ -1,14 +1,15 @@
 import { VIEW_PORTS } from '../@types/VIEW_PORTS';
 import puppeteer from '../services/puppeteer';
+import USERAGENTS, { USERAGENTSBROWSERS, USERAGENTSOS } from '../@types/USERAGENTS';
 
 export class User {
   public name: string = '';
 
   public email: string = '';
 
-  public SO: string = '';
+  public SO: USERAGENTSOS = 'windows';
 
-  public browser: string = '';
+  public browser: USERAGENTSBROWSERS = 'chrome';
 
   public idioma: string = '';
 
@@ -24,10 +25,19 @@ export class User {
       userDataDir: `./tmp/${this.email}`,
       args: ['--no-sandbox'],
       defaultViewport: VIEW_PORTS[this.viewport],
-      
+      product: 'firefox',
     });
+
     const page = await browser.newPage();
-    page.setUserAgent(`Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36`);
+    page.setUserAgent(USERAGENTS[this.browser][this.SO]);
     await page.goto('https://antoinevastel.com/bots/datadome');
+  }
+
+  public getSO(): USERAGENTSOS {
+    return this.SO;
+  }
+
+  public setSO(so: USERAGENTSOS): void {
+    this.SO = so;
   }
 }

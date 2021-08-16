@@ -42,7 +42,8 @@ export const UserController = {
       await user.start();
       res.send(user);
     } catch (error) {
-      res.status(400).send('Email Inváliddo');
+      console.log(error);
+      res.status(400).send(error);
     }
   },
 
